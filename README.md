@@ -1,13 +1,17 @@
-##Установка
+UTMSTAT API CLIENT
+==================
+
+
+## Установка
 
 Добавьте в композер пакет: 
 ```text
 "utmstat/api-client-php": "dev-master"
 ```
 
-##Использование
+## Использование
 
-###Список заявок
+### Список заявок
 
 ```php
 $token = 'hX_eSBo4XrJy98XKkDSJhfs';
@@ -21,9 +25,9 @@ $filter = [
 $leads = $api->leadsList($filter);
 ```
 
-###Изменить статус заявки
+### Изменить статус заявки
 
-####Обновление по id заявки внутри UTMSTAT
+#### Обновление по id заявки внутри UTMSTAT
 
 ```php
 $token = 'hX_eSBo4XrJy98XKkDSJhfs';
@@ -35,7 +39,7 @@ $lead = [
 $api->leadsUpdate($lead);
 ```
 
-####Обновление по id заявки из внешней CRM (RetailCRM)
+#### Обновление по id заявки из внешней CRM (RetailCRM)
 
 ```php
 $token = 'hX_eSBo4XrJy98XKkDSJhfs';
@@ -47,9 +51,9 @@ $lead = [
 $api->leadsUpdate($lead);
 ```
 
-##Справочник
+## Справочник
 
-###Коды статусов сделок
+### Коды статусов сделок
 
 1 - Новый
 

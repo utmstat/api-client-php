@@ -1,6 +1,6 @@
 <?php
 
-namespace UtmStat;
+namespace app\components\utmstat;
 
 class UtmStatApiClient
 {
@@ -46,8 +46,9 @@ class UtmStatApiClient
         return $result;
     }
 
-    public function leadsUpdate($lead)
+    public function leadsUpdate($lead, $by = 'id')
     {
+        $lead['update_by_field'] = $by;
         $result = $this->call('leads/update', $lead);
         return $result;
     }

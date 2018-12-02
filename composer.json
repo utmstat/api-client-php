@@ -21,6 +21,11 @@
     "autoload": {
         "psr-0": { "UtmStat\\": "lib/" }
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "master"
+        }
+    },
     "config": {
         "bin-dir": "bin",
         "process-timeout": 600

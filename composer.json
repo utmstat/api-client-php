@@ -1,0 +1,28 @@
+{
+    "name": "utmstat/api-client-php",
+    "description": "PHP client for UTMSTAT API",
+    "type": "library",
+    "keywords": ["API", "UTMSTAT", "REST"],
+    "homepage": "https://utmstat.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "UTMSTAT",
+            "email": "utmstat.com@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "ext-curl": "*"
+    },
+    "support": {
+        "email": "utmstat.com@gmail.com"
+    },
+    "autoload": {
+        "psr-0": { "UtmStat\\": "lib/" }
+    },
+    "config": {
+        "bin-dir": "bin",
+        "process-timeout": 600
+    }
+}

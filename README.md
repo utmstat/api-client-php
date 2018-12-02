@@ -1,7 +1,7 @@
 ##Установка
 
 Добавьте в композер пакет: 
-```json
+```text
 "utmstat/api-client-php": "dev-master"
 ```
 

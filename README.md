@@ -9,6 +9,11 @@ UTMSTAT API CLIENT
 "utmstat/api-client-php": "dev-master"
 ```
 
+Получите токен здесь: 
+```text
+https://utmstat.com/projects/api
+```
+
 ## Использование
 
 ### Список заявок

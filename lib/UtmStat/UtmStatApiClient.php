@@ -1,6 +1,6 @@
 <?php
 
-namespace UtmStat;
+namespace app\components\utmstat;
 
 class UtmStatApiClient
 {
@@ -29,6 +29,12 @@ class UtmStatApiClient
     public function hasError()
     {
         $result = $this->getLastResponseData()['http_code'] != 200;
+        return $result;
+    }
+
+    public function leadAdd($lead)
+    {
+        $result = $this->call('lead/add', $lead);
         return $result;
     }
 

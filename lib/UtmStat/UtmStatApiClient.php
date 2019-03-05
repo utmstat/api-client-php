@@ -1,6 +1,6 @@
 <?php
 
-namespace app\components\utmstat;
+namespace UtmStat;
 
 class UtmStatApiClient
 {

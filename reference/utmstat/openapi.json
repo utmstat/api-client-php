@@ -1,0 +1,570 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "UTMSTAT",
+    "version": "v1",
+    "contact": {
+      "name": "Aleksey Laptev",
+      "email": "utmstat.com@gmail.com"
+    },
+    "description": "Описание API сервиса сквозной аналитики utmstat.com"
+  },
+  "host": "api.utmstat.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/x-www-form-urlencoded"
+  ],
+  "paths": {
+    "/call/{hash}/start/": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "hash",
+          "in": "path",
+          "required": true,
+          "description": "Хэш проекта"
+        }
+      ],
+      "post": {
+        "summary": "/call/{hash}start/",
+        "tags": [
+          "Звонки"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "description": "HTTP статус",
+                  "default": 200,
+                  "example": 200
+                },
+                "has_error": {
+                  "description": "Флаг наличия ошибки",
+                  "type": "null"
+                },
+                "data": {
+                  "type": "null",
+                  "description": "Возвращаемые данные"
+                },
+                "message": {
+                  "description": "Сообщение об ошибке",
+                  "type": "null"
+                }
+              },
+              "required": [
+                "status",
+                "has_error",
+                "data",
+                "message"
+              ]
+            },
+            "examples": {
+              "Пример": {
+                "status": 200,
+                "has_error": null,
+                "data": null,
+                "message": null
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "default": 400,
+                  "description": "HTTP статус",
+                  "example": 400
+                },
+                "has_error": {
+                  "type": "integer",
+                  "default": 1,
+                  "description": "Флаг наличия ошибки",
+                  "example": 1
+                },
+                "data": {
+                  "type": "null",
+                  "description": "Возвращаемые данные"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Сообщение об ошибке",
+                  "example": "Номер должен быть в формате 71234567890"
+                }
+              },
+              "required": [
+                "status",
+                "has_error",
+                "data",
+                "message"
+              ]
+            },
+            "examples": {
+              "Пример": {
+                "status": 400,
+                "has_error": 1,
+                "data": null,
+                "message": "Номер должен быть в формате 71234567890"
+              }
+            }
+          }
+        },
+        "description": "Уведомление о начале звонка",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "type": "string",
+            "name": "event",
+            "description": "Название события: notify_start",
+            "required": true,
+            "default": "notify_start"
+          },
+          {
+            "in": "formData",
+            "type": "string",
+            "name": "telephony_name",
+            "description": "Название телефонии",
+            "default": "Внешняя телефония",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "type": "string",
+            "description": "Id звонка, должен быть уникальным в пределах проекта",
+            "name": "call_id",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "type": "number",
+            "name": "call_start",
+            "description": "Время начала звонка в формате timestamp",
+            "pattern": "/\\d+/",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "type": "number",
+            "name": "caller_id",
+            "description": "Номер вызывающего абонента в формате 71234567890",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "type": "number",
+            "name": "called_did",
+            "description": "Номер вызываемого абонента в формате 71234567890",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "type": "string",
+            "name": "manager_id",
+            "description": "Id менеджера, на которого назначается данный звонок"
+          }
+        ],
+        "operationId": "POST_call-hash-start",
+        "x-stoplight": {
+          "id": "POST_call-hash-start",
+          "beforeScript": null,
+          "afterScript": null,
+          "public": true,
+          "mock": {
+            "enabled": false,
+            "dynamic": false,
+            "statusCode": 200
+          }
+        }
+      }
+    },
+    "/call/{hash}/end/": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "hash",
+          "in": "path",
+          "required": true,
+          "description": "Хэш проекта"
+        }
+      ],
+      "post": {
+        "summary": "/call/{hash}/end/",
+        "tags": [
+          "Звонки"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "Пример": {
+                "status": 200,
+                "has_error": null,
+                "data": null,
+                "message": null
+              }
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "description": "HTTP статус",
+                  "example": 200,
+                  "default": 200
+                },
+                "has_error": {
+                  "type": "null",
+                  "description": "Флаг наличия ошибки"
+                },
+                "data": {
+                  "type": "null",
+                  "description": "Возвращаемые данные"
+                },
+                "message": {
+                  "type": "null",
+                  "description": "Сообщение об ошибке"
+                }
+              },
+              "required": [
+                "status",
+                "has_error",
+                "data",
+                "message"
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "default": 400,
+                  "description": "HTTP статус",
+                  "example": 400
+                },
+                "has_error": {
+                  "type": "integer",
+                  "default": 1,
+                  "description": "Флаг наличия ошибки",
+                  "example": 1
+                },
+                "data": {
+                  "type": "null",
+                  "description": "Возвращаемые данные"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Сообщение об ошибке",
+                  "example": "Номер должен быть в формате 71234567890"
+                }
+              },
+              "required": [
+                "status",
+                "has_error",
+                "data",
+                "message"
+              ]
+            },
+            "examples": {
+              "Пример": {
+                "status": 400,
+                "has_error": 1,
+                "data": null,
+                "message": "Номер должен быть в формате 71234567890"
+              }
+            }
+          }
+        },
+        "description": "Уведомление о завершении звонка",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "type": "string",
+            "name": "event",
+            "description": "Название события: notify_end",
+            "default": "notify_end",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "type": "string",
+            "name": "call_id",
+            "required": true,
+            "description": "Id звонка, должен быть уникальным в пределах проекта"
+          },
+          {
+            "in": "formData",
+            "type": "number",
+            "name": "call_start",
+            "required": true,
+            "description": "Время начала звонка в формате timestamp"
+          },
+          {
+            "in": "formData",
+            "type": "string",
+            "name": "caller_id",
+            "required": true,
+            "description": "Номер вызывающего абонента в формате 71234567890"
+          },
+          {
+            "in": "formData",
+            "type": "string",
+            "name": "called_did",
+            "required": true,
+            "description": "Номер вызываемого абонента в формате 71234567890"
+          },
+          {
+            "in": "formData",
+            "type": "integer",
+            "name": "duration",
+            "required": true,
+            "description": "Длительность звонка в секундах"
+          },
+          {
+            "in": "formData",
+            "type": "string",
+            "name": "disposition",
+            "enum": [
+              "ANSWERED",
+              "NO ANSWER",
+              "CONGESTION",
+              "FAILED",
+              "BUSY"
+            ],
+            "required": true,
+            "description": "Статус завершения звонка"
+          },
+          {
+            "in": "formData",
+            "type": "string",
+            "name": "manager_id",
+            "description": "Id менеджера, на которого назначается данный звонок"
+          }
+        ],
+        "operationId": "POST_call-hash-end",
+        "x-stoplight": {
+          "id": "POST_call-hash-end",
+          "beforeScript": null,
+          "afterScript": null,
+          "public": true,
+          "mock": {
+            "enabled": false,
+            "dynamic": false,
+            "statusCode": 200
+          }
+        }
+      }
+    },
+    "/call/{hash}/record/": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "hash",
+          "in": "path",
+          "required": true,
+          "description": "Хэш проекта"
+        }
+      ],
+      "post": {
+        "summary": "/call/{hash}/record/",
+        "tags": [
+          "Звонки"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "default": 200,
+                  "description": "HTTP статус",
+                  "example": 200
+                },
+                "has_error": {
+                  "type": "null",
+                  "description": "Флаг наличия ошибки"
+                },
+                "data": {
+                  "type": "null",
+                  "description": "Возвращаемые данные"
+                },
+                "message": {
+                  "type": "null",
+                  "description": "Сообщение об ошибке"
+                }
+              },
+              "required": [
+                "status",
+                "has_error",
+                "data",
+                "message"
+              ]
+            },
+            "examples": {
+              "Пример": {
+                "status": 200,
+                "has_error": null,
+                "data": null,
+                "message": null
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "default": 400,
+                  "description": "HTTP статус",
+                  "example": 400
+                },
+                "has_error": {
+                  "type": "integer",
+                  "default": 1,
+                  "description": "Флаг наличия ошибки",
+                  "example": 1
+                },
+                "data": {
+                  "type": "null",
+                  "description": "Возвращаемые данные"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Сообщение об ошибке",
+                  "example": "record_url должен являться валидным URL"
+                }
+              },
+              "required": [
+                "status",
+                "has_error",
+                "data",
+                "message"
+              ]
+            },
+            "examples": {
+              "Пример": {
+                "status": 400,
+                "has_error": 1,
+                "data": null,
+                "message": "Параметр record_url должен быть валидным URL"
+              }
+            }
+          }
+        },
+        "description": "Уведомление о записи звонка",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "type": "string",
+            "name": "event",
+            "description": "Название события: notify_record",
+            "default": "notify_record",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "type": "string",
+            "name": "call_id",
+            "required": true,
+            "description": "Id звонка, должен быть уникальным в пределах проекта"
+          },
+          {
+            "in": "formData",
+            "type": "string",
+            "name": "record_url",
+            "required": true,
+            "description": "Ссылка на запись. Должна быть валидным url"
+          }
+        ],
+        "operationId": "POST_call-hash-record",
+        "x-stoplight": {
+          "id": "POST_call-hash-record",
+          "beforeScript": null,
+          "afterScript": null,
+          "public": true,
+          "mock": {
+            "enabled": false,
+            "dynamic": false,
+            "statusCode": 200
+          }
+        }
+      }
+    }
+  },
+  "basePath": "/v1",
+  "securityDefinitions": {},
+  "x-stoplight": {
+    "beforeScript": "function(ctx, request) { window.utmStatConf = {projectId: \"f3bf99445f4f8290e13999e6bd90f8a8\", replaceTextElements: [], hasJivosite: true, hasMetrika: false, hasAnalytics: false, useCookieSync: true}; \n (function (u, t, m) { var s = u.createElement(t), n = u.getElementsByTagName(t)[0]; s.type = \"text/javascript\"; s.async = true; s.src = m + \"?v=\" + Date.now(); n.parentNode.insertBefore(s, n);})(document, \"script\", \"//static.utmstat.com/client.min.js\"); }",
+    "afterScript": null,
+    "version": {
+      "groups": {
+        "docs": [
+          {
+            "name": "API",
+            "divider": false,
+            "items": [
+              {
+                "_id": "introduction",
+                "type": "docTextSections"
+              }
+            ]
+          },
+          {
+            "description": "",
+            "divider": false,
+            "items": [
+              {
+                "_id": "POST_call-hash-start",
+                "type": "endpoints"
+              },
+              {
+                "_id": "POST_call-hash-end",
+                "type": "endpoints"
+              },
+              {
+                "_id": "POST_call-hash-record",
+                "type": "endpoints"
+              }
+            ],
+            "name": "Звонки"
+          }
+        ]
+      }
+    },
+    "functions": {},
+    "textSections": {
+      "introduction": {
+        "id": "introduction",
+        "name": "Начало работы",
+        "content": "С помощью данного API можно различные бизнес-задачи.\n\n ### Протокол передачи данных\n\n API поддерживает только HTTPS протокол.\n\n ### Формат запроса \n\n По умолчанию в API Utmstat используются POST-запросы. Кросс-доменные запросы (CORS) не поддерживаются. \n\n ### Формат ответа \n\n Форматом ответа по умолчанию является JSON.",
+        "public": true
+      }
+    }
+  }
+}
